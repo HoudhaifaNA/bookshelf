@@ -1,0 +1,33 @@
+.nav {
+  height: 8vh;
+  background-color: #290082;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6rem;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 12%;
+}
+
+.navItem {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.navItem > a {
+  color: #fff;
+  text-decoration: none;
+}

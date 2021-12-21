@@ -1,0 +1,22 @@
+.searchBar {
+  width: 50rem;
+  height: 3.5rem;
+  background-color: #fff;
+  border-radius: 10rem;
+  overflow: hidden;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0 1.7rem;
+  outline: none;
+  border: none;
+}
+
+.searchInput::placeholder {
+  font-weight: 500;
+}
