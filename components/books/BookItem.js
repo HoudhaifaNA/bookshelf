@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import truncate from "../../lib/truncate";
 import styles from "./BookItem.module.css";
+import Icon from "../Icon";
 
 const BookItem = ({ title, author, image }) => {
   const [originTitle, shortTitle] = truncate(title, 40);
@@ -9,6 +10,13 @@ const BookItem = ({ title, author, image }) => {
 
   return (
     <div className={styles.item} title={originTitle}>
+      <div className={styles.shadow} />
+      <div className={styles.saveBtn}>
+        {/* <div className={styles.loader} /> */}
+        <svg className={styles.icon}>
+          <Icon icon="save" />
+        </svg>
+      </div>
       <div className={styles.image}>
         <Image
           src={image}
