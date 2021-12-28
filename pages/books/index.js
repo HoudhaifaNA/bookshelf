@@ -37,9 +37,9 @@ export const getServerSideProps = async ({ query }) => {
   const response = await fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${
       query.filter ? query.filter : "intitle"
-    }:${
-      query.q
-    }&key=AIzaSyCQDCoLw1tpTqfcNZaLKaWuhdjTPFA_J8c&langRestrict=en&maxResults=40&startIndex=0`
+    }:${query.q}&key=${
+      process.env.API_KEY
+    }&langRestrict=en&maxResults=40&startIndex=0`
   );
   const data = await response.json();
   return {

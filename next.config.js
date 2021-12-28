@@ -3,4 +3,7 @@ module.exports = {
   images: {
     domains: ["books.google.com"],
   },
+  env: {
+    API_KEY: "AIzaSyCQDCoLw1tpTqfcNZaLKaWuhdjTPFA_J8c",
+  },
 };

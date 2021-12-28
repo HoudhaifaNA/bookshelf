@@ -11,7 +11,7 @@ import Icon from "../Icon";
 const Navigation = () => {
   const router = useRouter();
   const [width, setWidth] = useState();
-  const [searchBar, setSearchBar] = useState(false);
+  const [searchBar, setSearchBar] = useState(true);
   const [term, setTerm] = useContext(BooksContext);
 
   ////////////////////////

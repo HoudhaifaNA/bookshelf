@@ -1,11 +1,17 @@
-import { useContext } from "react";
-import { BooksContext } from "../../context/BooksContext";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 
+import { BooksContext } from "../../context/BooksContext";
 import styles from "./SearchBar.module.css";
 
 const SearchBar = (props) => {
   const [term, setTerm] = useContext(BooksContext);
-
+  const router = useRouter();
+  useEffect(() => {
+    if (router.route === "/books") {
+      setTerm(router.query.q);
+    }
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
     props.onSearch();
