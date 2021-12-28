@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 12%;
+  flex-basis: 12%;
 }
 
 .navItem {
@@ -30,4 +30,59 @@
 .navItem > a {
   color: #fff;
   text-decoration: none;
+}
+
+.smallItem {
+  display: none;
+}
+
+.icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  fill: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+  .navList {
+    flex-basis: 14%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .navList {
+    flex-basis: 17%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav {
+    padding: 0 4rem;
+  }
+
+  .navList {
+    flex-basis: 12%;
+  }
+  .navItem {
+    display: none;
+  }
+
+  .smallItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    padding: 0 2rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .navList {
+    flex-basis: 15%;
+  }
+}
+@media screen and (max-width: 380px) {
+  .navList {
+    flex-basis: 22%;
+  }
 }

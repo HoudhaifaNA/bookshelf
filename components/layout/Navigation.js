@@ -1,23 +1,84 @@
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { BooksContext } from "../../context/BooksContext";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import SearchBar from "./SearchBar";
 import styles from "./Navigation.module.css";
+import SearchBar from "./SearchBar";
+import Icon from "../Icon";
 
 const Navigation = () => {
+  const router = useRouter();
+  const [width, setWidth] = useState();
+  const [searchBar, setSearchBar] = useState(false);
+  const [term, setTerm] = useContext(BooksContext);
+
+  ////////////////////////
+  // Set width if reloaded or resized
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, []);
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+      if (window.innerWidth > 768) setSearchBar(true);
+    });
+  }
+
+  ////////////////////////
+  // Handle Searching
+  const onSearch = () => {
+    if (term.length !== 0 && searchBar)
+      router.push(`/books?q=${term.split(" ").join("+")}`);
+  };
+
+  const handleSearchClick = () => {
+    if (width <= 768) setSearchBar(!searchBar);
+    onSearch();
+  };
+
+  ////////////////////////
+  // Render list depending on width
+  const renderList = () => {
+    if (width <= 768) {
+      return (
+        <>
+          <li className={styles.smallItem} onClick={handleSearchClick}>
+            <svg className={styles.icon}>
+              <Icon icon="search" />
+            </svg>
+          </li>
+          <li className={styles.smallItem}>
+            <svg className={styles.icon}>
+              <Icon icon="user-circle" />
+            </svg>
+          </li>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <li className={styles.navItem}>
+            <Link href="/login">Login</Link>
+          </li>
+          <li className={styles.navItem}>
+            <button className="primary-btn">Sign up</button>
+          </li>
+        </>
+      );
+    }
+  };
+
+  ////////////////////////
   return (
     <div className={styles.nav}>
       <Link href="/" passHref>
         <a className={styles.logo}> Bookshelf.</a>
       </Link>
-      <SearchBar />
-      <ul className={styles.navList}>
-        <li className={styles.navItem}>
-          <Link href="/login">Login</Link>
-        </li>
-        <li className={styles.navItem}>
-          <button className="primary-btn">Sign up</button>
-        </li>
-      </ul>
+      {searchBar ? <SearchBar onSearch={onSearch} /> : ""}
+      <ul className={styles.navList}>{renderList()}</ul>
     </div>
   );
 };

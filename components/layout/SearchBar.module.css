@@ -1,5 +1,5 @@
 .searchBar {
-  width: 50rem;
+  flex-basis: 44%;
   height: 3.5rem;
   background-color: #fff;
   border-radius: 10rem;
@@ -19,4 +19,25 @@
 
 .searchInput::placeholder {
   font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .searchBar {
+    position: fixed;
+    left: 0;
+    top: 7rem;
+    width: 100vw;
+    height: 5.5rem;
+    border-radius: 0;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  }
+  .searchInput {
+    font-size: 1.4rem;
+    padding: 0 4rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .searchInput {
+    padding: 0 2rem;
+  }
 }

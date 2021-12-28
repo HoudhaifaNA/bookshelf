@@ -1,0 +1,27 @@
+.container {
+  height: 5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.filterItem {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #ffe2e7;
+  color: #f70c33;
+  font-weight: 700;
+  margin-right: 2rem;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+
+.filterItemGrey {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #ebe7e7;
+  color: #777777;
+  font-weight: 700;
+  margin-right: 2rem;
+  border-radius: 10rem;
+}

@@ -1,11 +1,14 @@
 import Layout from "../components/layout/Layout";
+import { ContextWrapper } from "../context/BooksContext";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ContextWrapper>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ContextWrapper>
   );
 }
 

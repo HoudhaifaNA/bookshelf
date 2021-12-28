@@ -1,22 +1,23 @@
-import { useRouter } from "next/router";
-import { useRef } from "react";
+import { useContext } from "react";
+import { BooksContext } from "../../context/BooksContext";
+
 import styles from "./SearchBar.module.css";
 
-const SearchBar = () => {
-  const termRef = useRef();
-  const router = useRouter();
+const SearchBar = (props) => {
+  const [term, setTerm] = useContext(BooksContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(termRef.current.value);
-    router.push(`/books?q=${termRef.current.value}`);
+    props.onSearch();
   };
   return (
-    <form className={styles.searchBar} onSubmit={handleSubmit}>
+    <form id="myform" className={styles.searchBar} onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Search by Title, Author, Subject, ISBN"
         className={styles.searchInput}
-        ref={termRef}
+        onChange={(e) => setTerm(e.target.value)}
+        value={term}
       />
     </form>
   );
