@@ -4,6 +4,11 @@ const Meta = (props) => {
   return (
     <>
       <Head>
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+
         <title>{props.title}</title>
       </Head>
     </>
