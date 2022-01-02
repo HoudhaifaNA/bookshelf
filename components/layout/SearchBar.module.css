@@ -43,3 +43,9 @@
     padding: 0;
   }
 }
+
+@media screen and (max-height: 635px) {
+  .searchBar {
+    top: 6rem;
+  }
+}

@@ -26,7 +26,6 @@ const Navigation = () => {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
       if (window.innerWidth > 768) return setSearchBar(true);
-      return setSearchBar(false);
     });
   }
 
