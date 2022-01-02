@@ -9,7 +9,6 @@ const BookThumbnail = ({ image, id }) => {
     <div className={styles.thumbnail}>
       <div className={styles.image}>
         <Image
-          loader={() => image}
           src={image}
           alt="test"
           blurDataURL={image}

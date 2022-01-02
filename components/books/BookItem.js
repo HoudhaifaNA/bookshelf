@@ -22,7 +22,6 @@ const BookItem = ({ id, title, author, image }) => {
         </div>
         <div className={styles.image}>
           <Image
-            loader={() => image}
             src={image}
             alt={originTitle}
             blurDataURL={image}

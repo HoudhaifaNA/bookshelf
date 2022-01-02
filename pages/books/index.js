@@ -56,7 +56,7 @@ export const getServerSideProps = async ({ query }) => {
 
     const data = await response.json();
     const bookList = data.items ? data.items : [];
-    console.log(data);
+
     return {
       props: {
         bookItems: bookList,

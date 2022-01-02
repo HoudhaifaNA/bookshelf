@@ -8,7 +8,6 @@ const Meta = (props) => {
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-
         <title>{props.title}</title>
       </Head>
     </>
