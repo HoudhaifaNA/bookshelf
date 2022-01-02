@@ -87,3 +87,17 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
+@media only screen and (max-width: 440px) {
+  .container {
+    width: 30rem;
+    height: 48rem;
+  }
+  .statuses {
+    flex-direction: column;
+  }
+
+  .statuses > div {
+    margin-top: 2rem;
+  }
+}

@@ -1,4 +1,10 @@
 .nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  box-sizing: border-box;
   height: 8vh;
   background-color: #290082;
   display: flex;

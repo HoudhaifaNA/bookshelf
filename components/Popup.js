@@ -7,6 +7,7 @@ const statuses = ["To read", "Reading", "Have read"];
 
 const Popup = ({ toggleModal }) => {
   const [status, setStatus] = useState("To read");
+
   const renderStatus = () => {
     return statuses.map((el) => {
       const selected = el === status;
@@ -30,6 +31,7 @@ const Popup = ({ toggleModal }) => {
       );
     });
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.close} onClick={() => toggleModal(false)}>
