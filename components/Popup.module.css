@@ -1,0 +1,89 @@
+.container {
+  position: relative;
+  width: 50rem;
+  height: 25rem;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.close {
+  position: absolute;
+  right: 2rem;
+  top: 1.5rem;
+  cursor: pointer;
+}
+
+.close > svg {
+  width: 2rem;
+  height: 2rem;
+  fill: #5a5a5a;
+}
+
+.statuses {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.statuses > div {
+  position: relative;
+  width: 14rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a5a5a;
+  border: 0.2em solid #777777;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+#statusChecked {
+  color: #000;
+  border-color: #3164f0;
+}
+
+.checkedContainer {
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  z-index: 5000;
+  width: 2rem;
+  height: 2rem;
+  background-color: #fff;
+  border-radius: 10rem;
+}
+.checked {
+  width: 2rem;
+  height: 2rem;
+  fill: #3164f0;
+}
+
+.action {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+}
+
+.button {
+  padding: 0.8rem 2rem;
+  background-color: #3164f0;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}

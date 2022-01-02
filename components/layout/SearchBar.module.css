@@ -3,6 +3,7 @@
   height: 3.5rem;
   background-color: #fff;
   border-radius: 10rem;
+  padding-left: 1.7rem;
   overflow: hidden;
 }
 
@@ -12,7 +13,6 @@
   font-family: "Poppins", sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
-  padding: 0 1.7rem;
   outline: none;
   border: none;
 }
@@ -24,6 +24,7 @@
 @media screen and (max-width: 768px) {
   .searchBar {
     position: fixed;
+    z-index: 2500;
     left: 0;
     top: 7rem;
     width: 100vw;

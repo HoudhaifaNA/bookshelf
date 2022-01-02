@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { BooksContext } from "../../context/BooksContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -12,7 +12,8 @@ const Navigation = () => {
   const router = useRouter();
   const [width, setWidth] = useState();
   const [searchBar, setSearchBar] = useState(true);
-  const [term, setTerm] = useContext(BooksContext);
+  const { search } = useContext(GlobalContext);
+  const [term, setTerm] = search;
 
   ////////////////////////
   // Set width if reloaded or resized
@@ -31,7 +32,9 @@ const Navigation = () => {
   // Handle Searching
   const onSearch = () => {
     if (term.length !== 0 && searchBar)
-      router.push(`/books?q=${term.split(" ").join("+")}`);
+      router.push(
+        `/books?q=${term.trim().split(" ").join("+")}&filter=intitle`
+      );
   };
 
   const handleSearchClick = () => {

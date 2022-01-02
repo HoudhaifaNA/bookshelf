@@ -1,24 +1,28 @@
 .item {
   position: relative;
   grid-column: span 1;
-  height: 34rem;
+  grid-row: span 1;
   cursor: pointer;
 }
 
-.loader {
-  width: 2rem;
-  height: 2rem;
-  background: transparent;
-  border: 0.2rem solid #af98dd;
-  border-right-color: #3e0da1;
-  border-radius: 50%;
-  animation: loading 0.5s linear infinite;
+.status {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1500;
+  padding: 0.2rem 1.5rem;
+  background-color: #deceff;
+  color: #3e0da1;
+  text-align: center;
+  font-size: 1rem;
+  text-transform: capitalize;
 }
+
 .saveBtn {
   position: absolute;
   z-index: 1500;
   right: 1rem;
-  top: 1rem;
+  top: 2.5rem;
   width: 4rem;
   height: 3.5rem;
   background-color: #deceff;
@@ -29,6 +33,16 @@
   visibility: hidden;
   border-radius: 0.5rem;
   transition: all 0.2s ease;
+}
+
+.loader {
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: 0.2rem solid #af98dd;
+  border-right-color: #3e0da1;
+  border-radius: 50%;
+  animation: loading 0.5s linear infinite;
 }
 
 .icon {
@@ -78,21 +92,6 @@
 }
 
 /*-----------------------------*/
-.imageSketleton {
-  background-color: #c7c7c7;
-  height: 82%;
-}
-
-.authorSketleton {
-  background-color: #c7c7c7;
-  height: 5%;
-  width: 70%;
-}
-
-.titleSketleton {
-  background-color: #c7c7c7;
-  height: 5%;
-}
 
 @keyframes loading {
   0% {
