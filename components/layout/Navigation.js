@@ -11,30 +11,35 @@ import Icon from "../Icon";
 const Navigation = () => {
   const router = useRouter();
   const [width, setWidth] = useState();
-  const [searchBar, setSearchBar] = useState(true);
+  const [searchBar, setSearchBar] = useState(false);
   const { search } = useContext(GlobalContext);
   const [term, setTerm] = search;
 
   ////////////////////////
   // Set width if reloaded or resized
   useEffect(() => {
+    if (window.innerWidth > 768) setSearchBar(true);
     setWidth(window.innerWidth);
   }, []);
 
   if (typeof window !== "undefined") {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
-      if (window.innerWidth > 768) setSearchBar(true);
+      if (window.innerWidth > 768) return setSearchBar(true);
+      return setSearchBar(false);
     });
   }
 
   ////////////////////////
   // Handle Searching
   const onSearch = () => {
-    if (term.length !== 0 && searchBar)
+    if (term.length !== 0 && searchBar) {
       router.push(
         `/books?q=${term.trim().split(" ").join("+")}&filter=intitle`
       );
+      if (width <= 768) setSearchBar(false);
+    }
+    if (!searchBar) setSearchBar(true);
   };
 
   const handleSearchClick = () => {
