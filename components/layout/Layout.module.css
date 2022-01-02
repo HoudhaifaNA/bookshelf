@@ -1,6 +1,8 @@
 .main > * {
   position: absolute;
   top: 9vh;
+  width: 100%;
+  box-sizing: border-box;
   padding: 0 6rem;
 }
 @media screen and (max-width: 768px) {
