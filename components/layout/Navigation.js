@@ -80,13 +80,16 @@ const Navigation = () => {
 
   ////////////////////////
   return (
-    <div className={styles.nav}>
-      <Link href="/" passHref>
-        <a className={styles.logo}> Bookshelf.</a>
-      </Link>
-      {searchBar ? <SearchBar onSearch={onSearch} /> : ""}
-      <ul className={styles.navList}>{renderList()}</ul>
-    </div>
+    <header className={styles.header}>
+      <div className={styles.nav}>
+        <Link href="/" passHref>
+          <a className={styles.logo}> Bookshelf.</a>
+        </Link>
+        {width > 768 ? <SearchBar onSearch={onSearch} /> : ""}
+        <ul className={styles.navList}>{renderList()}</ul>
+      </div>
+      {width <= 768 && searchBar ? <SearchBar onSearch={onSearch} /> : ""}
+    </header>
   );
 };
 

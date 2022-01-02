@@ -1,5 +1,17 @@
+.header {
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 5555555;
+  height: 9vh;
+  display: flex;
+  flex-direction: column;
+  background: none;
+}
 .nav {
-  height: 8vh;
+  height: 8rem;
+  width: 100%;
+  box-sizing: border-box;
   background-color: #290082;
   display: flex;
   align-items: center;

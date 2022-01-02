@@ -24,9 +24,8 @@
 @media screen and (max-width: 768px) {
   .searchBar {
     position: absolute;
-    z-index: 2500;
     left: 0;
-    top: 7rem;
+    top: 9vh;
     width: 100%;
     box-sizing: border-box;
     height: 5.5rem;
@@ -41,11 +40,5 @@
 @media screen and (max-width: 600px) {
   .searchInput {
     padding: 0;
-  }
-}
-
-@media screen and (max-height: 635px) {
-  .searchBar {
-    top: 6rem;
   }
 }
