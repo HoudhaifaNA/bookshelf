@@ -1,5 +1,5 @@
 .header {
-  height: 91vh;
+  height: 92%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,6 +9,7 @@
   background-size: cover;
   background-position: center;
   color: #fff;
+  overflow: hidden;
 }
 
 .heading {
@@ -16,7 +17,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 40%;
+  height: 40rem;
   width: 70%;
   margin: 0 auto;
   padding: 5rem 0;
@@ -41,7 +42,6 @@
 @media screen and (max-width: 768px) {
   .heading {
     width: 100%;
-    height: 40%;
     transform: translateY(-7rem);
   }
 }
@@ -50,35 +50,32 @@
     background-size: cover;
   }
   .heading {
-    height: 45%;
+    height: 50rem;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .heading {
-    height: 40%;
-  }
   .headingPrimary {
     font-size: 3.5rem;
   }
   .headingSecondary {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 }
 
 @media screen and (max-height: 635px) {
   .heading {
-    height: 55%;
+    height: 55rem;
+    transform: none;
   }
 }
 @media screen and (max-width: 320px) {
-  .heading {
-    height: 70%;
-  }
   .headingPrimary {
     font-size: 3.8rem;
   }
-  .headingSecondary {
-    font-size: 1.8rem;
+}
+@media screen and (max-width: 280px) {
+  .heading {
+    height: 55rem;
   }
 }

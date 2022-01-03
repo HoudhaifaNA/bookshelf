@@ -2,14 +2,14 @@
   position: fixed;
   width: 100%;
   box-sizing: border-box;
-  z-index: 5555555;
-  height: 9vh;
+  z-index: 15000;
+  height: 7rem;
   display: flex;
   flex-direction: column;
   background: none;
 }
 .nav {
-  height: 8rem;
+  height: 7rem;
   width: 100%;
   box-sizing: border-box;
   background-color: #290082;
