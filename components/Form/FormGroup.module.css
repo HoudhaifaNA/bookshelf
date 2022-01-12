@@ -1,0 +1,36 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+.input {
+  padding: 1.1rem 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  outline: none;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+}
+
+.input::placeholder {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.input:focus {
+  border: 0.2rem solid royalblue;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 500;
+}

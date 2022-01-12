@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
@@ -11,7 +12,9 @@ const Home = () => {
           Search any book you want and get all its informations with the ability
           to save it to your collection
         </h3>
-        <button className="primary-btn">Get started today</button>
+        <Link href="/auth?type=signup" passHref>
+          <button className="primary-btn">Get started today</button>
+        </Link>
       </div>
     </div>
   );

@@ -21,8 +21,14 @@ body {
   overflow-x: hidden;
 }
 
+input {
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
 button {
   font-family: "Poppins", sans-serif;
+  outline: none;
   cursor: pointer;
 }
 

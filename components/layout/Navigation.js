@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +11,7 @@ const Navigation = () => {
   const router = useRouter();
   const [width, setWidth] = useState();
   const [searchBar, setSearchBar] = useState(false);
-  const { search } = useContext(GlobalContext);
+  const { search, loggedIn } = useContext(GlobalContext);
   const [term, setTerm] = search;
 
   ////////////////////////
@@ -58,21 +57,37 @@ const Navigation = () => {
             </svg>
           </li>
           <li className={styles.smallItem}>
-            <svg className={styles.icon}>
-              <Icon icon="user-circle" />
-            </svg>
+            <Link href="/login" passHref>
+              <svg className={styles.icon}>
+                <Icon icon="user-circle" />
+              </svg>
+            </Link>
           </li>
         </>
       );
     } else {
       return (
         <>
-          <li className={styles.navItem}>
-            <Link href="/login">Login</Link>
-          </li>
-          <li className={styles.navItem}>
-            <button className="primary-btn">Sign up</button>
-          </li>
+          {loggedIn ? (
+            <li className={styles.navItem}>
+              <Link href="/login" passHref>
+                My collection
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          {loggedIn !== "" ? (
+            <li className={styles.navItem}>
+              <Link href={loggedIn ? "/api/user/logout" : "/login"} passHref>
+                <button className="primary-btn">
+                  {loggedIn ? "Logout" : "Sign up"}
+                </button>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
         </>
       );
     }

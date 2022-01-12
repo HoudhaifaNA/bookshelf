@@ -31,13 +31,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-basis: 12%;
 }
 
 .navItem {
   color: #fff;
   font-size: 1.2rem;
   font-weight: 600;
+  margin-left: 2rem;
 }
 .navItem > a {
   color: #fff;
@@ -54,16 +54,6 @@
   fill: #fff;
 }
 
-@media screen and (max-width: 1200px) {
-  .navList {
-    flex-basis: 14%;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .navList {
-    flex-basis: 17%;
-  }
-}
 @media screen and (max-width: 768px) {
   .nav {
     padding: 0 4rem;
