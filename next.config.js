@@ -4,7 +4,7 @@ module.exports = {
     domains: ["books.google.com"],
   },
   env: {
-    URL: "http://localhost:3000",
+    URL: "https://bookshelf.vercel.app",
     API_KEY: "AIzaSyCQDCoLw1tpTqfcNZaLKaWuhdjTPFA_J8c",
     SENDGRID_API_KEY:
       "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",
