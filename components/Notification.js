@@ -4,7 +4,7 @@ import Icon from "./Icon";
 
 const Notification = ({ type, message }) => {
   return (
-    <div className={styles.notification}>
+    <div id={styles.notification}>
       <div className={styles.icon}>
         <svg className={styles[type]}>
           <Icon icon={type} />
