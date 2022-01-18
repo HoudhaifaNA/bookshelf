@@ -26,6 +26,7 @@ const BookInfo = ({ publisher, publishedDate, ISBNS, pageCount }) => {
     );
   }
 
+  // TRANSFORM DATE "2019-05-19" TO TEXT "19 May, 2019"
   const dateToText = () => {
     if (publishedDate) {
       const dateSplitted = publishedDate.split("-");

@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 
+import styles from "../../styles/Books.module.css";
+
 import Meta from "../../components/Meta";
 import BookItem from "../../components/books/BookItem";
 import Filter from "../../components/books/Filter";
 import Paging from "../../components/books/Paging";
-import styles from "../../styles/Books.module.css";
 
 const Books = ({ bookItems, totalItems }) => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const Books = ({ bookItems, totalItems }) => {
         if (el.volumeInfo.imageLinks && el.volumeInfo.authors) {
           return (
             <BookItem
-              key={el.id}
+              key={Math.random() * 5555}
               id={el.id}
               title={el.volumeInfo.title}
               author={el.volumeInfo.authors[0]}
@@ -25,7 +26,7 @@ const Books = ({ bookItems, totalItems }) => {
         }
       });
     } else {
-      return <div></div>;
+      return;
     }
   };
   return (

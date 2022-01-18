@@ -10,13 +10,18 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "POST":
       try {
-        const { title, authors, thumbnail } = req.body;
+        const { title, author, thumbnail, bookId, status } = req.body;
+        if (status === " ") {
+          return errorHandler(new AppError("Status is required", 403), res);
+        }
         await User.findByIdAndUpdate(req.user._id, {
           $push: {
             books: {
               title,
-              authors,
+              author,
               thumbnail,
+              bookId,
+              status,
             },
           },
         });

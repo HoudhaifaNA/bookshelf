@@ -18,19 +18,23 @@ const BookDetails = ({
   pageCount,
   averageRating,
   ratingsCount,
+  isSaved,
 }) => {
   const descriptionRef = useRef();
   const { modal } = useContext(GlobalContext);
-  const [modalOpen, toggleModal] = modal;
+  const [, toggleModal] = modal;
 
+  // 1) GET RATING DISPLAY CLASSES
   const stars = displayRating(averageRating);
 
   useEffect(() => {
     descriptionRef.current.innerHTML = "";
-    descriptionRef.current.insertAdjacentHTML("beforeend", description);
+    if (description)
+      descriptionRef.current.insertAdjacentHTML("beforeend", description);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // 2) RENDER AUTHORS LINK
   const authorsLink = authors.map((author) => {
     return (
       <Link
@@ -65,7 +69,7 @@ const BookDetails = ({
       )}
       <div ref={descriptionRef} className={styles.description}></div>
       <button className={styles.addBtn} onClick={() => toggleModal(true)}>
-        Add to my Shelf
+        {isSaved ? "Edit my shelf" : "Add to my shelf"}
       </button>
       <BookInfo
         publisher={publisher}

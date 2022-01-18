@@ -11,19 +11,27 @@ dbConnect();
 export default async (req, res) => {
   switch (req.method) {
     case "GET":
-      const token = req.cookies.auth_token || req.query.token;
-      if (token) {
-        const decoded = await promisify(jwt.verify)(
-          token,
-          process.env.JWT_SECRET
-        );
+      if (req.cookies.auth_token || req.query.token) {
+        try {
+          let token = req.cookies.auth_token || req.query.token;
+          // 1) verify token
+          const decoded = await promisify(jwt.verify)(
+            token,
+            process.env.JWT_SECRET
+          );
 
-        const user = await User.findById(decoded.id);
-        if (!user)
-          return res.status(404).json({ message: "User does not exist" });
-        return res.status(200).json({ user });
+          // 2) Check if user still exists
+          const currentUser = await User.findById(decoded.id);
+          if (!currentUser) {
+            return res.status(200).json({ message: "User doesn't exist" });
+          }
+
+          return res.status(200).json({ message: "logged in", currentUser });
+        } catch (err) {
+          return res.status(200).json({ message: "not logged in" });
+        }
       }
-      return res.status(401).json({ message: "failed" });
+      return res.status(200).json({ message: "not logged in" });
     default:
       return errorHandler(new AppError("Endpoint does not exist", 404), res);
   }

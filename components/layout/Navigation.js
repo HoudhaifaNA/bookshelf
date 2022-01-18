@@ -1,26 +1,31 @@
 import { useEffect, useState, useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styles from "./Navigation.module.css";
+
+import { GlobalContext } from "../../context/GlobalContext";
+
 import SearchBar from "./SearchBar";
 import Icon from "../Icon";
+import axios from "axios";
 
 const Navigation = () => {
   const router = useRouter();
   const [width, setWidth] = useState();
   const [searchBar, setSearchBar] = useState(false);
-  const { search, loggedIn } = useContext(GlobalContext);
-  const [term, setTerm] = search;
+  const { search, loggedIn, notification } = useContext(GlobalContext);
+  const [, toggleNotification] = notification;
+  const [term] = search;
 
   ////////////////////////
-  // Set width if reloaded or resized
+  // Set width if reloaded
   useEffect(() => {
     if (window.innerWidth > 768) setSearchBar(true);
     setWidth(window.innerWidth);
   }, []);
 
+  // Set width if reloaded   or resized
   if (typeof window !== "undefined") {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
@@ -31,18 +36,41 @@ const Navigation = () => {
   ////////////////////////
   // Handle Searching
   const onSearch = () => {
+    // IF THERE IS A TERM AND SEARCHBAER IS TOGGLED
     if (term.length !== 0 && searchBar) {
       router.push(
         `/books?q=${term.trim().split(" ").join("+")}&filter=intitle`
       );
+      // IF IT IS PHONE MODE THAN CLOSE AFTER SEARCH
       if (width <= 768) setSearchBar(false);
     }
+    // IF IT IS PHONE MODE AND SEARCH BAR IS TOGGLED OFF, THEN TOGGLE IT ON
     if (!searchBar) setSearchBar(true);
   };
 
   const handleSearchClick = () => {
+    // IF IT IS PHONE MODE TOGGLE SEARCH BAR
     if (width <= 768) setSearchBar(!searchBar);
     onSearch();
+  };
+
+  const navBtn = async () => {
+    if (loggedIn) {
+      try {
+        await axios("/api/user/logout");
+        location.assign("/");
+      } catch (err) {
+        toggleNotification({
+          type: "error",
+          message: err.response.data.message,
+        });
+      }
+    } else {
+      router.push("/login");
+    }
+    setTimeout(() => {
+      toggleNotification(null);
+    }, 2000);
   };
 
   ////////////////////////
@@ -56,12 +84,23 @@ const Navigation = () => {
               <Icon icon="search" />
             </svg>
           </li>
-          <li className={styles.smallItem}>
-            <Link href="/login" passHref>
+          {loggedIn ? (
+            <li className={styles.smallItem}>
+              <Link href="/mylibrary" passHref>
+                <svg className={styles.icon}>
+                  <Icon icon="bookmark" />
+                </svg>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          <li className={styles.smallItem} onClick={navBtn}>
+            <span>
               <svg className={styles.icon}>
-                <Icon icon="user-circle" />
+                <Icon icon={loggedIn ? "logout" : "user-circle"} />
               </svg>
-            </Link>
+            </span>
           </li>
         </>
       );
@@ -70,29 +109,32 @@ const Navigation = () => {
         <>
           {loggedIn ? (
             <li className={styles.navItem}>
-              <Link href="/login" passHref>
-                My collection
+              <Link href="/mylibrary" passHref>
+                My library
               </Link>
             </li>
           ) : (
             ""
           )}
-          {loggedIn !== "" ? (
-            <li className={styles.navItem}>
-              <Link href={loggedIn ? "/api/user/logout" : "/login"} passHref>
-                <button className="primary-btn">
-                  {loggedIn ? "Logout" : "Sign up"}
-                </button>
-              </Link>
-            </li>
-          ) : (
-            ""
-          )}
+          (
+          <li className={styles.navItem} onClick={navBtn}>
+            <button className="primary-btn">
+              {loggedIn ? "Logout" : "Sign up"}
+            </button>
+          </li>
         </>
       );
     }
   };
 
+  let renderSearchBar = (place) => {
+    if (
+      (width > 768 && place === "inside") ||
+      (width <= 768 && searchBar && place === "outside")
+    ) {
+      return <SearchBar onSearch={onSearch} />;
+    }
+  };
   ////////////////////////
   return (
     <header className={styles.header}>
@@ -100,10 +142,10 @@ const Navigation = () => {
         <Link href="/" passHref>
           <a className={styles.logo}> Bookshelf.</a>
         </Link>
-        {width > 768 ? <SearchBar onSearch={onSearch} /> : ""}
+        {renderSearchBar("inside")}
         <ul className={styles.navList}>{renderList()}</ul>
       </div>
-      {width <= 768 && searchBar ? <SearchBar onSearch={onSearch} /> : ""}
+      {renderSearchBar("outside")}
     </header>
   );
 };

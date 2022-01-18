@@ -1,6 +1,6 @@
 import styles from "./FormGroup.module.css";
 
-const FormGroup = ({ error, value, getEmail }) => {
+const FormGroup = ({ value, getEmail }) => {
   return (
     <div className={styles.group}>
       <label htmlFor="email" className={styles.label}>
@@ -15,7 +15,6 @@ const FormGroup = ({ error, value, getEmail }) => {
         required
         onChange={(e) => getEmail(e.target.value)}
       />
-      {error ? <span className={styles.error}>Invalid email</span> : ""}
     </div>
   );
 };

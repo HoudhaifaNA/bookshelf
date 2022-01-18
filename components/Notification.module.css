@@ -1,0 +1,43 @@
+.notification {
+  position: absolute;
+  right: 3rem;
+  top: 10rem;
+  z-index: 150000;
+  width: 35rem;
+  min-height: 8rem;
+  padding: 1.5rem 0;
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  flex-basis: 15%;
+  display: flex;
+  justify-content: center;
+}
+.icon svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.error {
+  fill: red;
+}
+
+.success {
+  fill: #00a136;
+}
+
+.text {
+  flex: 1;
+}
+.notification h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.notification p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}

@@ -1,35 +1,17 @@
-import { useContext } from "react";
-import Modal from "react-modal";
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from "react";
 import BookDetails from "../../components/bookDetails/BookDetails";
 import BookThumbnail from "../../components/bookDetails/BookThumbnail";
 import styles from "../../styles/BookPage.module.css";
 import Meta from "../../components/Meta";
-import Popup from "../../components/Popup";
 import { GlobalContext } from "../../context/GlobalContext";
 
-Modal.setAppElement("#__next");
+const BookPage = ({ currentBook }) => {
+  const { book, userBooks } = useContext(GlobalContext);
+  const [, selectBook] = book;
+  const { volumeInfo } = currentBook;
+  const isSaved = userBooks.find((el) => el.bookId === currentBook.id);
 
-const customStyles = {
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, .4)",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    padding: "0",
-  },
-};
-
-const BookPage = ({ book }) => {
-  const { modal } = useContext(GlobalContext);
-  const [modalOpen, toggleModal] = modal;
-
-  const { volumeInfo } = book;
   const {
     imageLinks,
     title,
@@ -44,18 +26,23 @@ const BookPage = ({ book }) => {
     pageCount,
   } = volumeInfo;
 
+  useEffect(() => {
+    selectBook({
+      id: currentBook.id,
+      title,
+      author: authors[0],
+      thumbnail: imageLinks.thumbnail,
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Meta title={`${title} - Bookshelf`} />
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={() => toggleModal(false)}
-        contentLabel="Popup modal"
-        style={customStyles}
-      >
-        <Popup toggleModal={toggleModal} />
-      </Modal>
-      <BookThumbnail image={imageLinks.thumbnail} id={book.id} />
+      <BookThumbnail
+        image={imageLinks.thumbnail}
+        id={currentBook.id}
+        isSaved={isSaved}
+      />
       <BookDetails
         title={title}
         subtitle={subtitle}
@@ -67,6 +54,7 @@ const BookPage = ({ book }) => {
         publishedDate={publishedDate}
         industryIdentifiers={industryIdentifiers}
         pageCount={pageCount}
+        isSaved={isSaved}
       />
     </div>
   );
@@ -84,7 +72,7 @@ export const getServerSideProps = async ({ query }) => {
 
     return {
       props: {
-        book: data,
+        currentBook: data,
       },
     };
   } catch (err) {

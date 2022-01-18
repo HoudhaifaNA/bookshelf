@@ -1,31 +1,51 @@
-import { useRouter } from "next/router";
-import { createContext, useState } from "react";
-import isLoggedIn from "../middleware/isLoggedIn";
+/* eslint-disable react-hooks/exhaustive-deps */
+import axios from "axios";
+import { Router, useRouter } from "next/router";
+import { createContext, useEffect, useState } from "react";
 
 export const GlobalContext = createContext();
 
 export function ContextWrapper({ children }) {
   const [term, setTerm] = useState("");
   const [modalOpen, toggleModal] = useState(false);
-  const [content, toggleNotification] = useState(null);
+  const [bookSelected, selectBook] = useState({
+    title: "",
+    author: "",
+    thumbnail: "",
+    status: "",
+    id: "",
+  });
+  const [content, toggleNotification] = useState();
   const [loggedIn, setLoggedIn] = useState("");
+  const [books, setUserBooks] = useState([]);
+  const [filteredArr, filterBooks] = useState();
 
   const seeStatus = async () => {
-    const status = await isLoggedIn();
-    setLoggedIn(status);
+    const res = await axios(`${process.env.URL}/api/user/isLoggedIn`);
+    if (res.data.currentUser) {
+      setUserBooks(res.data.currentUser.books);
+      return setLoggedIn(true);
+    }
+    return setLoggedIn(false);
   };
-  seeStatus();
-  // const router = useRouter();
-  // if (router.pathname === "/login" || router.pathname.startsWith("/confirm")) {
-  //   if (loggedIn) location.assign("/");
-  // }
+
+  useEffect(() => {
+    seeStatus();
+  }, [, modalOpen]);
+
+  useEffect(() => {
+    toggleModal(false);
+  }, [useRouter().asPath]);
 
   return (
     <GlobalContext.Provider
       value={{
         search: [term, setTerm],
         modal: [modalOpen, toggleModal],
+        book: [bookSelected, selectBook],
         notification: [content, toggleNotification],
+        userBooks: books,
+        filteredBooks: [filteredArr, filterBooks],
         loggedIn,
       }}
     >

@@ -12,7 +12,7 @@ const Home = () => {
           Search any book you want and get all its informations with the ability
           to save it to your collection
         </h3>
-        <Link href="/auth?type=signup" passHref>
+        <Link href="/login" passHref>
           <button className="primary-btn">Get started today</button>
         </Link>
       </div>

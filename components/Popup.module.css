@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  z-index: 1000;
   width: 50rem;
   height: 25rem;
   background-color: rgb(255, 255, 255);
@@ -86,6 +87,10 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.button:disabled {
+  background-color: #858585;
 }
 
 @media only screen and (max-width: 440px) {

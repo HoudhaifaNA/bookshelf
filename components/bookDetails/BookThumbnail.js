@@ -3,11 +3,13 @@ import Image from "next/image";
 import styles from "./BookThumbnail.module.css";
 import Icon from "../Icon";
 
-const BookThumbnail = ({ image, id }) => {
+const BookThumbnail = ({ image, id, isSaved }) => {
   const previewLink = `https://www.google.com/books/edition/_/${id}`;
+
   return (
     <div className={styles.thumbnail}>
       <div className={styles.image}>
+        {isSaved ? <div className={styles.status}>{isSaved.status}</div> : ""}
         <Image
           src={image}
           alt="test"

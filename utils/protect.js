@@ -3,10 +3,7 @@ import jwt from "jsonwebtoken";
 
 import errorHandler from "./errorHandler";
 import AppError from "./AppError";
-import dbConnect from "./dbConnect";
 import User from "../models/userModel";
-
-dbConnect();
 
 const protect = (handler) => {
   return async (req, res) => {
@@ -16,7 +13,10 @@ const protect = (handler) => {
     if (req.cookies.auth_token) token = req.cookies.auth_token;
 
     if (!token) {
-      return res.redirect("/login");
+      return errorHandler(
+        new AppError("Token doesn't exist or has expired", 401),
+        res
+      );
     }
 
     try {

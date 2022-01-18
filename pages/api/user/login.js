@@ -16,11 +16,11 @@ export default async (req, res) => {
         if (!user) user = await User.create({ email });
         const token = await user.createAuthToken();
         await user.save({ validateBeforeSave: false });
-
-        await new Email(
-          user,
-          `${req.headers.origin}/confirm/${token}`
-        ).sendAuthLink();
+        console.log(`${process.env.URL}/confirm/${token}`);
+        // await new Email(
+        //   user,
+        //   `${process.env.URL}/confirm/${token}`
+        // ).sendAuthLink();
         return res
           .status(200)
           .json({ message: "Email has been sent to your email address" });

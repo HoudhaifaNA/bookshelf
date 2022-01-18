@@ -68,7 +68,7 @@ export default async (req, res) => {
 
         return await createAndSendToken(user, res);
       } catch (err) {
-        console.log(err);
+        return errorHandler(new AppError(err, 403), res);
       }
 
     default:

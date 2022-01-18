@@ -16,11 +16,12 @@ const handler = async (req, res) => {
           "Set-Cookie",
           serialize("auth_token", "", {
             httpOnly: true,
-            maxAge: 604800000,
+            maxAge: 0,
             path: "/",
           })
         )
-        .redirect("/");
+        .status(200)
+        .json({ message: "logout" });
 
     default:
       return errorHandler(new AppError("Endpoint does not exist", 404), res);

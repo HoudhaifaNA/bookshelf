@@ -6,11 +6,22 @@ const bookSchema = new mongoose.Schema({
   title: {
     type: String,
   },
-  authors: {
+  author: {
     type: String,
   },
   thumbnail: {
     type: String,
+  },
+  bookId: {
+    type: String,
+    unique: [true, "Book already existed"],
+  },
+  status: {
+    type: String,
+    enum: {
+      values: ["To read", "Reading", "Have read"],
+      message: "Status is required.",
+    },
   },
 });
 

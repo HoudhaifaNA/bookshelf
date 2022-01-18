@@ -1,26 +1,45 @@
+import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import truncate from "../../lib/truncate";
 import styles from "./BookItem.module.css";
+import truncate from "../../lib/truncate";
 import Icon from "../Icon";
+import { GlobalContext } from "../../context/GlobalContext";
 
-const BookItem = ({ id, title, author, image }) => {
+const BookItem = ({ id, title, author, status, image }) => {
+  const { modal, book, userBooks } = useContext(GlobalContext);
+  const [, toggleModal] = modal;
+  const [, selectBook] = book;
   const [originTitle, shortTitle] = truncate(title, 40);
   const [originAuthor, shortAuthor] = truncate(author, 26);
+
+  // 1) SEE IF THE CURRENT BOOK IS SAVE
+  const isSaved = userBooks.find((el) => el.bookId === id);
+  // 2) IF SAVED RENDER THE STATUS READING OF THE BOOK
+  let renderStatus;
+  if (isSaved)
+    renderStatus = <h5 className={styles.status}>{isSaved.status}</h5>;
+
+  const handleAction = (e) => {
+    e.stopPropagation();
+    selectBook({ id, title, author, status, thumbnail: image });
+    toggleModal(true);
+  };
 
   return (
     <Link href={`/books/${id}`} passHref>
       <div className={styles.item} title={originTitle}>
-        <div className={styles.shadow} />
-        <h5 className={styles.status}>Saved</h5>
-        <div className={styles.saveBtn}>
-          {/* <div className={styles.loader} /> */}
-          <svg className={styles.icon}>
-            <Icon icon="save" />
-          </svg>
-        </div>
+        {renderStatus}
         <div className={styles.image}>
+          <div
+            className={`${styles.saveBtn} ${isSaved ? styles.selected : ""}`}
+            onClick={handleAction}
+          >
+            <svg className={styles.icon}>
+              <Icon icon="save" />
+            </svg>
+          </div>
           <Image
             src={image}
             alt={originTitle}
