@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 
 import styles from "../../styles/Books.module.css";
@@ -6,8 +7,10 @@ import Meta from "../../components/Meta";
 import BookItem from "../../components/books/BookItem";
 import Filter from "../../components/books/Filter";
 import Paging from "../../components/books/Paging";
+import NoBooks from "../../components/NoBooks";
 
 const Books = ({ bookItems, totalItems }) => {
+  console.log(totalItems);
   const router = useRouter();
 
   const renderBooks = () => {
@@ -29,12 +32,26 @@ const Books = ({ bookItems, totalItems }) => {
       return;
     }
   };
+
+  const renderPage = () => {
+    if (bookItems.length > 0) {
+      return (
+        <>
+          <Filter />
+          <div className={styles.booksContainer}>{renderBooks()}</div>
+          <Paging totalItems={totalItems} />
+        </>
+      );
+    } else {
+      return (
+        <NoBooks message=" No books found here You can try searching with another term" />
+      );
+    }
+  };
   return (
     <div className={styles.container}>
       <Meta title={`${router.query.q} - Bookshelf`} />
-      <Filter />
-      <div className={styles.booksContainer}>{renderBooks()}</div>
-      <Paging totalItems={totalItems} />
+      {renderPage()}
     </div>
   );
 };
@@ -57,15 +74,13 @@ export const getServerSideProps = async ({ query }) => {
 
     const data = await response.json();
     const bookList = data.items ? data.items : [];
-
+    const totalItems = data.totalItems ? data.totalItems : null;
     return {
       props: {
         bookItems: bookList,
-        totalItems: data.totalItems,
+        totalItems,
       },
     };
-  } catch (err) {
-    console.log("ERROR", { ...err });
-  }
+  } catch (err) {}
 };
 export default Books;

@@ -54,7 +54,7 @@ let renderStatus = (status, setStatus) => {
   });
 };
 
-const Popup = ({}) => {
+const Popup = () => {
   let method, url;
   const { modal, book, userBooks } = useContext(GlobalContext);
   const [modalOpen, toggleModal] = modal;

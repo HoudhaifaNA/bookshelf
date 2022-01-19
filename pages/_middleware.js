@@ -8,9 +8,11 @@ const handler = async (req) => {
     const data = await res.json();
     if (
       data.currentUser &&
-      (req.url === "/login" || req.url.startsWith("/confirm"))
+      (req.url === "/login" ||
+        req.url.startsWith("/confirm") ||
+        req.url === "/")
     ) {
-      return NextResponse.redirect("/");
+      return NextResponse.redirect("/mylibrary");
     } else if (
       !data.currentUser &&
       (req.url === "/mylibrary" || req.url === "/logout")

@@ -1,11 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 // import axios from "axios";
 // import { Router, useRouter } from "next/router";
 import { useContext } from "react";
 
+import styles from "../../styles/Books.module.css";
+
 import Meta from "../../components/Meta";
 import BookItem from "../../components/books/BookItem";
 import Filter from "../../components/books/Filter";
-import styles from "../../styles/Books.module.css";
+import NoBooks from "../../components/NoBooks";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const Books = () => {
@@ -29,14 +32,25 @@ const Books = () => {
         }
       });
     } else {
-      return <div></div>;
+      return;
+    }
+  };
+  const renderPage = () => {
+    if (userBooks.length > 0) {
+      return (
+        <>
+          <Filter />
+          <div className={styles.booksContainer}>{renderBooks()}</div>
+        </>
+      );
+    } else {
+      return <NoBooks message="You do not have any books saved yet." />;
     }
   };
   return (
     <div className={styles.container}>
       <Meta title="My library" />
-      <Filter />
-      <div className={styles.booksContainer}>{renderBooks()}</div>
+      {renderPage()}
     </div>
   );
 };
