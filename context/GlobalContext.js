@@ -21,7 +21,7 @@ export function ContextWrapper({ children }) {
   const [filteredArr, filterBooks] = useState();
 
   const seeStatus = async () => {
-    const res = await axios(`${process.env.URL}/api/user/isLoggedIn`);
+    const res = await axios(`/api/user/isLoggedIn`);
     if (res.data.currentUser) {
       setUserBooks(res.data.currentUser.books);
       return setLoggedIn(true);
