@@ -397,10 +397,6 @@ module.exports = class Email {
     this.url = url;
   }
   newTransport() {
-    console.log({
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
-    });
     return nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
