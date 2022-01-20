@@ -58,9 +58,7 @@ const Navigation = () => {
     if (loggedIn) {
       try {
         await axios("/api/user/logout");
-        setTimeout(() => {
-          location.assign("/");
-        }, 100);
+        location.assign("/");
       } catch (err) {
         toggleNotification({
           type: "error",
