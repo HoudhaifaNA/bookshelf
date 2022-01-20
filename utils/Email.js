@@ -15,8 +15,8 @@ module.exports = class Email {
   newTransport() {
     return nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // secure:true for port 465, secure:false for port 587
+      port: 465,
+      secure: true, // secure:true for port 465, secure:false for port 587
       auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD,
@@ -25,7 +25,7 @@ module.exports = class Email {
   }
   async sendAuthLink() {
     try {
-      const filePath = path.join(__dirname, "../../../public/template.html");
+      const filePath = path.join(__dirname, "./template.html");
       const source = fs.readFileSync(filePath, "utf-8").toString();
       const template = handlebars.compile(source);
       const replacements = {
