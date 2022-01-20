@@ -14,6 +14,7 @@ const bookSchema = new mongoose.Schema({
   },
   bookId: {
     type: String,
+    default: "",
     unique: [true, "Book already existed"],
   },
   status: {

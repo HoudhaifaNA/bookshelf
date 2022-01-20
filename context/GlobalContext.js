@@ -22,7 +22,6 @@ export function ContextWrapper({ children }) {
 
   const seeStatus = async () => {
     const res = await axios(`/api/user/isLoggedIn`);
-    console.log("RESONSE ***", res.data);
     if (res.data.currentUser) {
       setUserBooks(res.data.currentUser.books);
       return setLoggedIn(true);
