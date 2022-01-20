@@ -25,7 +25,7 @@ module.exports = class Email {
   }
   async sendAuthLink() {
     try {
-      const filePath = path.join(__dirname, "./public/template.html");
+      const filePath = path.join(__dirname, "../../../public/template.html");
       const source = fs.readFileSync(filePath, "utf-8").toString();
       const template = handlebars.compile(source);
       const replacements = {
