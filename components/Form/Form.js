@@ -34,9 +34,9 @@ const Form = ({ textContent, url }) => {
       toggleNotification({ type: "error", message: err.response.data.message });
     }
     submitRef.current.textContent = `${textContent}`;
-    // setTimeout(() => {
-    //   toggleNotification(null);
-    // }, 2500);
+    setTimeout(() => {
+      toggleNotification(null);
+    }, 2500);
   };
 
   return (

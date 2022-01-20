@@ -17,7 +17,7 @@ export function ContextWrapper({ children }) {
   });
   const [content, toggleNotification] = useState();
   const [loggedIn, setLoggedIn] = useState("");
-  const [books, setUserBooks] = useState([]);
+  const [books, setUserBooks] = useState([""]);
   const [filteredArr, filterBooks] = useState();
 
   const seeStatus = async () => {

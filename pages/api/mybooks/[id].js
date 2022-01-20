@@ -38,6 +38,7 @@ const handler = async (req, res) => {
 
         return res.status(204).json();
       } catch (err) {
+        console.log({ ...err });
         return errorHandler(err, res);
       }
     default:

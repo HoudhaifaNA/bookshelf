@@ -49,8 +49,8 @@
 }
 
 .icon {
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 2.5rem;
+  height: 2.5rem;
   fill: #fff;
 }
 
@@ -59,9 +59,6 @@
     padding: 0 4rem;
   }
 
-  .navList {
-    flex-basis: 18%;
-  }
   .navItem {
     display: none;
   }
@@ -70,16 +67,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 3rem;
   }
 }
 
 @media screen and (max-width: 600px) {
   .nav {
     padding: 0 2rem;
-  }
-}
-@media screen and (max-width: 480px) {
-  .navList {
-    flex-basis: 28%;
   }
 }
