@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   try {
+    console.log(req.url);
+
     const res = await fetch(
       `https://bookshelf.vercel.app/api/user/isLoggedIn?token=${req.cookies.auth_token}`
     );
@@ -17,7 +19,6 @@ const handler = async (req) => {
       !data.currentUser &&
       (req.url === "/mylibrary" || req.url === "/logout")
     ) {
-      console.log("SKCHCSCHSSDFDSFDSF");
       return NextResponse.redirect("/login");
     }
   } catch (err) {
