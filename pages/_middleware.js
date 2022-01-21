@@ -2,8 +2,6 @@
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   try {
-    console.log(req);
-
     const res = await fetch(
       `${process.env.URL}/api/user/isLoggedIn?token=${req.cookies.auth_token}`
     );
