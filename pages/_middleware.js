@@ -6,6 +6,8 @@ const handler = async (req) => {
       `http://localhost:3000/api/user/isLoggedIn?token=${req.cookies.auth_token}`
     );
     const data = await res.json();
+
+    console.log(data, req.url);
     if (
       data.currentUser &&
       (req.url === "/login" ||
@@ -22,8 +24,6 @@ const handler = async (req) => {
   } catch (err) {
     return NextResponse.next();
   }
-
-  return NextResponse.next();
 };
 
 export default handler;

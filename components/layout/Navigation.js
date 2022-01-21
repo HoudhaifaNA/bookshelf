@@ -65,7 +65,7 @@ const Navigation = () => {
           message: err.response.data.message,
         });
       }
-    } else {
+    } else if (!loggedIn) {
       router.push("/login");
     }
     setTimeout(() => {
