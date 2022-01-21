@@ -5,7 +5,7 @@ const handler = async (req) => {
     console.log(req);
 
     const res = await fetch(
-      `http://localhost:3000/api/user/isLoggedIn?token=${req.cookies.auth_token}`
+      `${process.env.URL}/api/user/isLoggedIn?token=${req.cookies.auth_token}`
     );
     const data = await res.json();
 
