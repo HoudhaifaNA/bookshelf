@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   try {
-    console.log("URL -----------", req.url);
+    console.log("URL -----------", { ...req });
 
     const res = await fetch(
       `https://bookshelf.vercel.app/api/user/isLoggedIn?token=${req.cookies.auth_token}`
