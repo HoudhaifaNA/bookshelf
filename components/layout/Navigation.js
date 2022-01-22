@@ -116,7 +116,7 @@ const Navigation = () => {
           ) : null}
           <li className={styles.navItem} onClick={navBtn}>
             <button className="primary-btn">
-              {loggedIn ? "Logout" : "Sign up"}
+              {loggedIn ? "Logout" : "Sign in"}
             </button>
           </li>
         </>

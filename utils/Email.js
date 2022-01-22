@@ -363,19 +363,21 @@ let HTML = `<!DOCTYPE html>
                         >
                           Thanks
                         </p>
+                        <a
+                        href={{url}}
+                        target="_blank"
+                      >
+                        {{url}}
+                      </a>
                       </td>
                     </tr>
                   </table>
                 </td>
               </tr>
 
-              <!-- END MAIN CONTENT AREA -->
+       
             </table>
-            <!-- END CENTERED WHITE CONTAINER -->
-
-            <!-- START FOOTER -->
-
-            <!-- END FOOTER -->
+    
           </div>
         </td>
         <td
