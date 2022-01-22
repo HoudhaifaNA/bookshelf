@@ -14,7 +14,6 @@ const bookSchema = new mongoose.Schema({
   },
   bookId: {
     type: String,
-    unique: [true, "Book id must be unique"],
   },
   status: {
     type: String,

@@ -113,10 +113,7 @@ const Navigation = () => {
                 My library
               </Link>
             </li>
-          ) : (
-            ""
-          )}
-          (
+          ) : null}
           <li className={styles.navItem} onClick={navBtn}>
             <button className="primary-btn">
               {loggedIn ? "Logout" : "Sign up"}
