@@ -2,11 +2,11 @@
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   let url = req.url.split("app")[1];
-  console.log("URL-------------", req.url);
+  console.log("URL-------------", `${req.url.split("app")[0]}app`, url);
 
   if (req.cookies.auth_token) {
     const res = await fetch(
-      `${req.url.split("app")[0]}/api/user/isLoggedIn?token=${
+      `${req.url.split("app")[0]}app/api/user/isLoggedIn?token=${
         req.cookies.auth_token
       }`
     );
