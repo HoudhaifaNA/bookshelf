@@ -9,6 +9,8 @@ const handler = async (req) => {
       `https://bookshelf.vercel.app/api/user/isLoggedIn?token=${req.cookies.auth_token}`
     );
     const data = await res.json();
+    console.log(data, res, "THIS STUFF");
+
     if (
       data.currentUser &&
       (url === "/login" || url.startsWith("/confirm") || url === "/")
@@ -21,7 +23,7 @@ const handler = async (req) => {
       return NextResponse.redirect("/login");
     }
   } catch (err) {
-    console.log({ ...err });
+    console.log("ERROR ---", { ...err });
     return NextResponse.next();
   }
 };
