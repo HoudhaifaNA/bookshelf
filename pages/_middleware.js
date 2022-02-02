@@ -2,16 +2,14 @@
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   let url = req.url.split("app")[1];
+  console.log(req.url.split("app")[0]);
 
   if (req.cookies.auth_token) {
-    console.log(url);
-
     const res = await fetch(
       `${req.url.split("app")[0]}/api/user/isLoggedIn?token=${
         req.cookies.auth_token
       }`
     );
-    console.log(res, req.url.split("app")[0]);
     let data = await res.json();
 
     if (
