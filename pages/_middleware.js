@@ -5,22 +5,26 @@ const handler = async (req) => {
     let url = req.url.split("app")[1];
     console.log(`URL ----------------------- ${url}`);
 
-    const res = await fetch(
-      `https://bookshelf.vercel.app/api/user/isLoggedIn?token=${req.cookies.auth_token}`
-    );
-    const data = await res.json();
-    console.log(data, res, "THIS STUFF");
-
-    if (
-      data.currentUser &&
-      (url === "/login" || url.startsWith("/confirm") || url === "/")
-    ) {
-      return NextResponse.redirect("/mylibrary");
-    } else if (
-      !data.currentUser &&
-      (url === "/mylibrary" || url === "/logout")
-    ) {
-      return NextResponse.redirect("/login");
+    if (req.cookies.auth_token) {
+      const res = await fetch(
+        `https://bookshelf.vercel.app/api/user/isLoggedIn?token=${req.cookies.auth_token}`
+      );
+      let data = await res.json();
+      if (
+        data.currentUser &&
+        (url === "/login" || url.startsWith("/confirm") || url === "/")
+      ) {
+        return NextResponse.redirect("/mylibrary");
+      } else if (
+        !data.currentUser &&
+        (url === "/mylibrary" || url === "/logout")
+      ) {
+        return NextResponse.redirect("/login");
+      }
+    } else {
+      if (!data.currentUser && (url === "/mylibrary" || url === "/logout")) {
+        return NextResponse.redirect("/login");
+      }
     }
   } catch (err) {
     console.log("ERROR ---", { ...err });
