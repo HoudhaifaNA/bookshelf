@@ -15,7 +15,6 @@ export default async (req, res) => {
         try {
           let token = req.cookies.auth_token || req.query.token;
           // 1) verify token
-          console.log("token", token);
           const decoded = await promisify(jwt.verify)(
             token,
             process.env.JWT_SECRET
@@ -23,12 +22,9 @@ export default async (req, res) => {
 
           // 2) Check if user still exists
           const currentUser = await User.findById(decoded.id);
-          console.log("currentUser", currentUser);
-
           if (!currentUser) {
             return res.status(200).json({ message: "User doesn't exist" });
           }
-          console.log("sent");
 
           return res.status(200).json({ message: "logged in", currentUser });
         } catch (err) {
