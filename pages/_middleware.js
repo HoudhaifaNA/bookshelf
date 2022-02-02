@@ -11,8 +11,9 @@ const handler = async (req) => {
         req.cookies.auth_token
       }`
     );
-
+    console.log(res, req.url.split("app")[0]);
     let data = await res.json();
+
     if (
       data.currentUser &&
       (url === "/login" || url.startsWith("/confirm") || url === "/")
