@@ -6,7 +6,9 @@ const handler = async (req) => {
   if (req.cookies.auth_token) {
     console.log("Cookie", req.cookies.auth_token);
     const res = await fetch(
-      `https://bookshelf.vercel.app/api/user/isLoggedIn?token=${req.cookies.auth_token}`
+      `${req.url.split("app")[0]}/api/user/isLoggedIn?token=${
+        req.cookies.auth_token
+      }`
     );
     console.log(res);
     let data = await res.json();
