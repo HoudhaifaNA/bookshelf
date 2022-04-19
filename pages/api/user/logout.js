@@ -11,17 +11,17 @@ dbConnect();
 const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
+      console.log("OH WOW---------");
+      const cookieOptions = {
+        maxAge: 0,
+        httpOnly: true,
+        path: "/",
+      };
+
       return res
-        .setHeader(
-          "Set-Cookie",
-          serialize("auth_token", "logout", {
-            httpOnly: true,
-            maxAge: 5,
-            path: "/",
-          })
-        )
+        .setHeader("Set-Cookie", serialize("auth_token", "", cookieOptions))
         .status(200)
-        .json({ message: "Loggout successfully" });
+        .json({ status: "success" });
     default:
       return errorHandler(new AppError("Endpoint does not exist", 404), res);
   }

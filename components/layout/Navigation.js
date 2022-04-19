@@ -58,21 +58,19 @@ const Navigation = () => {
     if (loggedIn) {
       try {
         await axios("/api/user/logout");
-        // setTimeout(() => {
-        //   location.assign("/");
-        // }, 500);
+        location.assign("/");
       } catch (err) {
         toggleNotification({
           type: "error",
           message: err.response.data.message,
         });
+        setTimeout(() => {
+          toggleNotification(null);
+        }, 2000);
       }
     } else if (!loggedIn) {
       router.push("/login");
     }
-    setTimeout(() => {
-      toggleNotification(null);
-    }, 2000);
   };
 
   ////////////////////////
