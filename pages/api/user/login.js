@@ -16,11 +16,13 @@ export default async (req, res) => {
         if (!user) user = await User.create({ email });
 
         const token = await user.createAuthToken();
+        const authLink = `${process.env.URL}/confirm/${token}`;
         await user.save({ validateBeforeSave: false });
-        await new Email(
-          user,
-          `${process.env.URL}/confirm/${token}`
-        ).sendAuthLink();
+        // await new Email(
+        //   user,
+        //   `${process.env.URL}/confirm/${token}`
+        // ).sendAuthLink();
+        await new Email(user, authLink).sendMagicLink();
 
         return res
           .status(200)
