@@ -11,17 +11,22 @@ dbConnect();
 const handler = async (req, res) => {
   switch (req.method) {
     case "GET":
-      console.log("OH WOW---------");
-      const cookieOptions = {
-        maxAge: 0,
-        httpOnly: true,
-        path: "/",
-      };
+      try {
+        console.log("OH WOW---------");
+        const cookieOptions = {
+          maxAge: 0,
+          httpOnly: true,
+          path: "/",
+        };
 
-      return res
-        .setHeader("Set-Cookie", serialize("auth_token", "", cookieOptions))
-        .status(200)
-        .json({ status: "success" });
+        return res
+          .setHeader("Set-Cookie", serialize("auth_token", "", cookieOptions))
+          .status(200)
+          .json({ status: "success" });
+      } catch (err) {
+        console.log("ERROR", err);
+      }
+
     default:
       return errorHandler(new AppError("Endpoint does not exist", 404), res);
   }
