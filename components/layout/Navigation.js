@@ -57,7 +57,7 @@ const Navigation = () => {
   const navBtn = async () => {
     if (loggedIn) {
       try {
-        await axios("/api/user/logout");
+        await axios.post("/api/user/logout");
         location.assign("/");
       } catch (err) {
         toggleNotification({

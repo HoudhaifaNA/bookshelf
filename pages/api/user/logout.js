@@ -10,7 +10,7 @@ dbConnect();
 
 const handler = async (req, res) => {
   switch (req.method) {
-    case "GET":
+    case "POST":
       try {
         console.log("OH WOW---------");
         const cookieOptions = {
