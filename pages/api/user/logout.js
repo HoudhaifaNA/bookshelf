@@ -12,7 +12,6 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "POST":
       try {
-        console.log("OH WOW---------");
         const cookieOptions = {
           maxAge: 0,
           httpOnly: true,
