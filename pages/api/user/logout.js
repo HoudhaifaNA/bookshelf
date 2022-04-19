@@ -16,7 +16,7 @@ const handler = async (req, res) => {
           "Set-Cookie",
           serialize("auth_token", "", {
             httpOnly: true,
-            maxAge: 0,
+            maxAge: 5,
             path: "/",
           })
         )

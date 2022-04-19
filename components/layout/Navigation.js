@@ -58,8 +58,10 @@ const Navigation = () => {
     if (loggedIn) {
       try {
         await axios("/api/user/logout");
-        location.assign("/");
+        // location.assign("/");
       } catch (err) {
+        console.log({ ...err });
+
         toggleNotification({
           type: "error",
           message: err.response.data.message,
