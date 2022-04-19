@@ -14,15 +14,14 @@ const handler = async (req, res) => {
       return res
         .setHeader(
           "Set-Cookie",
-          serialize("auth_token", "", {
+          serialize("auth_token", "logout", {
             httpOnly: true,
             maxAge: 5,
             path: "/",
           })
         )
         .status(200)
-        .json({ message: "logout" });
-
+        .json({ message: "Loggout successfully" });
     default:
       return errorHandler(new AppError("Endpoint does not exist", 404), res);
   }
