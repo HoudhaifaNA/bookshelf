@@ -28,7 +28,7 @@ const BookItem = ({ id, title, author, status, image }) => {
   };
 
   return (
-    <Link href={`/books/${id}`} passHref>
+    <Link href={`/books/${id}`} className={styles.link}>
       <div className={styles.item} title={originTitle}>
         {renderStatus}
         <div className={styles.image}>
@@ -45,7 +45,7 @@ const BookItem = ({ id, title, author, status, image }) => {
             alt={originTitle}
             blurDataURL={image}
             placeholder="blur"
-            layout="fill"
+            fill={true}
             className={styles.picture}
           />
         </div>
