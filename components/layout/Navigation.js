@@ -136,8 +136,8 @@ const Navigation = () => {
   return (
     <header className={styles.header}>
       <div className={styles.nav}>
-        <Link href="/" passHref>
-          <a className={styles.logo}> Bookshelf.</a>
+        <Link href="/" className={styles.logo}>
+          Bookshelf.
         </Link>
         {renderSearchBar("inside")}
         <ul className={styles.navList}>{renderList()}</ul>
