@@ -1,15 +1,14 @@
 const nodemailer = require("nodemailer");
-const fs = require("fs");
+const getEmailTemplate = require("../data/getEmailTemplate");
 const AppError = require("./AppError");
+// console.log("PATH", path.dirname(__dirname));
+// const templatePath = path.join(path.dirname, "email.html");
 
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
     this.url = url;
-    this.templateFile = fs
-      .readFileSync("./data/email.html", "utf8")
-      .toString()
-      .replaceAll("{{url}}", url);
+    this.templateFile = getEmailTemplate().replaceAll("{{url}}", this.url);
   }
 
   transporter = nodemailer.createTransport({
