@@ -13,6 +13,7 @@ const SearchBar = (props) => {
     if (router.route === "/books") {
       setTerm(router.query.q);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = (e) => {
