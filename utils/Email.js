@@ -1,32 +1,39 @@
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const nodemailer = require("nodemailer");
+const fs = require("fs");
 const AppError = require("./AppError");
 
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
     this.url = url;
-    this.fromEmail = "bookshelfcontact12@gmail.com";
-    this.fromName = "Houdhaifa";
+    this.templateFile = fs
+      .readFileSync("./data/email.html", "utf8")
+      .toString()
+      .replaceAll("{{url}}", url);
   }
+
+  transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.NODEMAILER_KEY,
+    },
+  });
 
   async sendMagicLink() {
     const mailOptions = {
+      from: "Houdhaifa",
       to: this.to,
-      from: {
-        email: this.fromEmail,
-        name: this.fromName,
-      },
-      templateId: "d-afda19cde40543c4b952c1ff72e87709",
-      dynamic_template_data: {
-        url: this.url,
-      },
+      subject: "Your login code is valid for 10 minutes",
+      html: this.templateFile,
     };
 
-    try {
-      await sgMail.send(mailOptions);
-    } catch (error) {
-      throw new AppError(error.response.body.errors[0].message, error.code);
-    }
+    await this.transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        throw new AppError(error.message, error.code);
+      } else {
+        console.log(`Email sent ${info.response}`);
+      }
+    });
   }
 };
