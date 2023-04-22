@@ -1,8 +1,5 @@
 const nodemailer = require("nodemailer");
 const getEmailTemplate = require("../data/getEmailTemplate");
-const AppError = require("./AppError");
-// console.log("PATH", path.dirname(__dirname));
-// const templatePath = path.join(path.dirname, "email.html");
 
 module.exports = class Email {
   constructor(user, url) {
@@ -24,15 +21,22 @@ module.exports = class Email {
       from: `Houdhaifa ${process.env.EMAIL}`,
       to: this.to,
       subject: "Your login code is valid for 10 minutes",
-      html: this.templateFile.replace(/{{url}}/g, this.url),
+      html: this.templateFile
+        .replace(/{{url}}/g, this.url)
+        .replace(/{{email}}/g, this.to),
     };
 
-    await this.transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        throw new AppError(error.message, error.code);
-      } else {
-        console.log(`Email sent ${info.response}`);
-      }
+    await new Promise((resolve, reject) => {
+      // send mail
+      this.transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error(`ERROR 🔥🔥 ${err.message}`);
+          reject(err);
+        } else {
+          console.log(`Email sent ${info.response}`);
+          resolve(info);
+        }
+      });
     });
   }
 };
