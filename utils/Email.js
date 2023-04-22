@@ -8,7 +8,7 @@ module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
     this.url = url;
-    this.templateFile = getEmailTemplate().replaceAll("{{url}}", this.url);
+    this.templateFile = getEmailTemplate();
   }
 
   transporter = nodemailer.createTransport({
@@ -24,7 +24,7 @@ module.exports = class Email {
       from: "Houdhaifa",
       to: this.to,
       subject: "Your login code is valid for 10 minutes",
-      html: this.templateFile,
+      html: this.templateFile.replaceAll("{{url}}", this.url),
     };
 
     await this.transporter.sendMail(mailOptions, (error, info) => {
