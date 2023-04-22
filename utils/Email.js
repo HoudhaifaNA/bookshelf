@@ -21,7 +21,7 @@ module.exports = class Email {
 
   async sendMagicLink() {
     const mailOptions = {
-      from: "Houdhaifa",
+      from: `Houdhaifa ${process.env.EMAIL}`,
       to: this.to,
       subject: "Your login code is valid for 10 minutes",
       html: this.templateFile.replace(/{{url}}/g, this.url),

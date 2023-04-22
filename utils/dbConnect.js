@@ -1,14 +1,9 @@
 import mongoose from "mongoose";
 
 const dbConnect = () => {
+  const DB = process.env.DATABASE.replace("PASSWORD", process.env.DB_PASSWORD);
   mongoose
-    .connect(
-      "mongodb+srv://bookshelf:CCn3bE1Xz6HkVgul@cluster0.ripzk.mongodb.net/bookshelf?retryWrites=true&w=majority",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    )
+    .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("CONNECT SUCCESSFULLY ..."))
     .catch((err) => console.log(err));
 };
