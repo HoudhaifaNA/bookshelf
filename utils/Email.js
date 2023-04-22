@@ -24,7 +24,7 @@ module.exports = class Email {
       from: "Houdhaifa",
       to: this.to,
       subject: "Your login code is valid for 10 minutes",
-      html: this.templateFile.replaceAll("{{url}}", this.url),
+      html: this.templateFile.replace(/{{url}}/g, this.url),
     };
 
     await this.transporter.sendMail(mailOptions, (error, info) => {
